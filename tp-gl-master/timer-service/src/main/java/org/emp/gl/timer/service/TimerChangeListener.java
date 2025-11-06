@@ -1,23 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.emp.gl.timer.service;
 
-/**
- *
- * @author tina
- */
-public interface TimerChangeListener  {
-    
-    final static String DIXEME_DE_SECONDE_PROP = "dixième" ;
-    final static String SECONDE_PROP = "seconde" ;
-    final static String MINUTE_PROP = "minute" ;
-    final static String HEURE_PROP = "heure" ;
-    
-    // cette méthode est appelé du TimeChangeProvider à chaque 
-    // fois qu'il y a un changement sur l'une des propriété de l'heure    
-    void propertyChange (String prop, Object oldValue, Object newValue) ;
-                  
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public interface TimerChangeListener extends PropertyChangeListener {
+    String DIXEME_DE_SECONDE_PROP = "dixième";
+    String SECONDE_PROP = "seconde";
+    String MINUTE_PROP = "minute";
+    String HEURE_PROP = "heure";
+
+    // Méthode personnalisée (abstraite ici pour forcer l'implémentation)
+    void propertyChange(String prop, Object oldValue, Object newValue);
+
+    // Implémentation par défaut pour PropertyChangeListener
+    @Override
+    default void propertyChange(PropertyChangeEvent evt) {
+        propertyChange(evt.getPropertyName(), evt.getOldValue(), evt.getNewValue());
+    }
 }
